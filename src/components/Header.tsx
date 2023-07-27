@@ -2,7 +2,7 @@ import {Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-const Header = () => (
+export const Header = () => (
   <View style={styles.container}>
     <Text category="h1">LAB Context</Text>
   </View>
@@ -14,5 +14,3 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
 });
-
-export default Header;

@@ -1,24 +1,29 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import {useStoreCtx} from '../context';
+import {formatCurrency} from '../utils';
 
-const Footer = () => {
+export const Footer = () => {
+  const {cart, toggleShowCart} = useStoreCtx();
+
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={toggleShowCart}>
+          Cart
+        </Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">{formatCurrency(total)}</Text>
         </Text>
       </View>
     </View>
   );
 };
-
-export default Footer;
 
 const styles = StyleSheet.create({
   main: {
