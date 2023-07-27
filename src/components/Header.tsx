@@ -1,10 +1,10 @@
-import {Text} from '@ui-kitten/components';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Text} from '@ui-kitten/components';
 
 const Header = () => (
   <View style={styles.container}>
-    <Text category="h1">LAB Context</Text>
+    <Text category='h1'>LAB Context</Text>
   </View>
 );
 
