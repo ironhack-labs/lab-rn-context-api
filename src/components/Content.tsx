@@ -1,7 +1,7 @@
 import {Button, List, ListItem} from '@ui-kitten/components';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import data from '../data.json';
+import data from '../../data.json';
 
 interface IListItem {
   title: string;
@@ -14,7 +14,7 @@ const renderItemAccessory = (): React.ReactElement => (
   <Button size="tiny">Add to cart</Button>
 );
 
-const Content = () => {
+export const Content = () => {
   return (
     <View style={styles.container}>
       <List
@@ -43,5 +43,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default Content;

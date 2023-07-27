@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Text} from '@ui-kitten/components';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <View style={styles.main}>
       <View style={styles.section}>
@@ -17,8 +17,6 @@ const Footer = () => {
     </View>
   );
 };
-
-export default Footer;
 
 const styles = StyleSheet.create({
   main: {

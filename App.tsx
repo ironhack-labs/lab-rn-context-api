@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 
 // UI KItten
 import * as eva from '@eva-design/eva';
@@ -8,14 +8,11 @@ import {
   Divider,
   IconRegistry,
   Layout,
-  Text,
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 // Components
-import Header from './components/Header';
-import Content from './components/Content';
-import Footer from './components/Footer';
+import {Header, Content, Footer} from './src/components';
 
 export default () => (
   <>
