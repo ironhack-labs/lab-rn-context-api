@@ -1,17 +1,30 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import {useAppContext} from '../context/appContext';
 
-const Footer = () => {
+const Footer = ({
+  showCart,
+  isCart,
+}: {
+  showCart?: () => void;
+  isCart?: boolean;
+}) => {
+  const {total, showCartButton} = useAppContext();
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
         {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        {showCartButton || isCart ? (
+          <Button size="small" onPress={showCart}>
+            {isCart ? "Go back" : "Cart"}
+          </Button>
+        ) : null}
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">${total || '0.00'}</Text>
         </Text>
       </View>
     </View>
