@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 
 // UI KItten
 import * as eva from '@eva-design/eva';
@@ -10,12 +10,13 @@ import {
   Layout,
   Text,
 } from '@ui-kitten/components';
-import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 // Components
 import Header from './components/Header';
 import Content from './components/Content';
 import Footer from './components/Footer';
+import CartContextProvider from './src/context/CartContext/cartState';
 
 export default () => (
   <>
@@ -25,11 +26,13 @@ export default () => (
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.dark}>
         <Layout style={styles.mainArea}>
-          <Header />
-          <Divider />
-          <Content />
-          <Divider />
-          <Footer />
+          <CartContextProvider>
+            <Header />
+            <Divider />
+            <Content />
+            <Divider />
+            <Footer />
+          </CartContextProvider>
         </Layout>
       </ApplicationProvider>
     </SafeAreaView>
@@ -37,7 +40,7 @@ export default () => (
 );
 
 const styles = StyleSheet.create({
-  topArea: {flex: 0, backgroundColor: 'rgb(21, 26, 48)'},
+  topArea: { flex: 0, backgroundColor: 'rgb(21, 26, 48)' },
   mainArea: {
     flex: 1,
     backgroundColor: 'rgb(21, 26, 48)',
