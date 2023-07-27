@@ -4,7 +4,7 @@ import {Button, Text} from '@ui-kitten/components';
 import {useCart} from '../context/context';
 
 const Footer = () => {
-  const {state} = useCart();
+  const {state, dispatch} = useCart();
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -24,7 +24,13 @@ const Footer = () => {
     <View style={styles.main}>
       <View style={styles.section}>
         {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button
+          size="small"
+          onPress={() =>
+            dispatch({type: 'SHOW_CART', payload: !state.showCart})
+          }>
+          {state.showCart ? 'Catalog' : 'Cart'}
+        </Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>

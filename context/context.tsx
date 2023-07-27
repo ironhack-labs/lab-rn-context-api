@@ -11,14 +11,17 @@ export type Product = {
 
 type CartState = {
   products: Product[];
+  showCart: boolean;
 };
 
 type Action =
   | {type: 'ADD_TO_CART'; payload: Product}
-  | {type: 'REMOVE_FROM_CART'; payload: Product};
+  | {type: 'REMOVE_FROM_CART'; payload: Product}
+  | {type: 'SHOW_CART'; payload: boolean};
 
 const initialState: CartState = {
   products: data,
+  showCart: false,
 };
 
 const cartReducer = (state: CartState, action: Action): CartState => {
@@ -42,6 +45,11 @@ const cartReducer = (state: CartState, action: Action): CartState => {
       return {
         ...state,
         products: [...state.products],
+      };
+    case 'SHOW_CART':
+      return {
+        ...state,
+        showCart: action.payload,
       };
     default:
       return state;
