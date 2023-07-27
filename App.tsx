@@ -1,16 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
-
-// UI KItten
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { ApplicationProvider, Divider, IconRegistry, Layout } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
-import {
-  ApplicationProvider,
-  Divider,
-  IconRegistry,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
-import {EvaIconsPack} from '@ui-kitten/eva-icons';
+
+// Importamos el CartProvider
+import { CartProvider } from './CartContext';
 
 // Components
 import Header from './components/Header';
@@ -24,13 +19,15 @@ export default () => (
     <SafeAreaView style={styles.mainArea}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.dark}>
-        <Layout style={styles.mainArea}>
-          <Header />
-          <Divider />
-          <Content />
-          <Divider />
-          <Footer />
-        </Layout>
+        <CartProvider>
+          <Layout style={styles.mainArea}>
+            <Header />
+            <Divider />
+            <Content />
+            <Divider />
+            <Footer />
+          </Layout>
+        </CartProvider>
       </ApplicationProvider>
     </SafeAreaView>
   </>

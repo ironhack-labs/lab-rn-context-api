@@ -1,42 +1,22 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, List, ListItem } from '@ui-kitten/components';
-
+import { IListItem } from '../types';
 import { useCart } from '../CartContext';
 
-//Datos
-import data from '../data.json';
-
-//Tipos
-import { IListItem } from '../types';
-
-const Content = () => {
+const Catalog = () => {
   const { state, dispatch } = useCart();
 
   const renderItemAccessory = (item: IListItem) => {
-    const isInCart = state.some((cartItem) => cartItem.id === item.id);
-
-    const handleAddToCart = () => {
-      if (isInCart) {
-        dispatch({ type: 'REMOVE_FROM_CART', payload: item.id });
-      } else {
-        dispatch({ type: 'ADD_TO_CART', payload: item });
-      }
-    };
-
-    return (
-      <Button onPress={handleAddToCart} size="tiny">
-        {isInCart ? 'Remove' : 'Add to cart'}
-      </Button>
-    );
+    // Lógica para renderizar el botón de agregar/eliminar (similar a la que tenías)
   };
 
   return (
     <View style={styles.container}>
       <List
         style={styles.container}
-        data={data}
-        renderItem={({ item }: { item: IListItem }): React.ReactElement => (
+        data={state.catalog} // Mostramos el catálogo del estado del contexto
+        renderItem={({ item }: { item: IListItem }) => (
           <ListItem
             title={`${item.title} | $${item.price}`}
             description={`${item.description}`}
@@ -54,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Content;
+export default Catalog;

@@ -1,24 +1,29 @@
-import {StyleSheet, View} from 'react-native';
-import React from 'react';
-import {Button, Text} from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text } from '@ui-kitten/components';
+
+//Context
+import { useCart } from '../CartContext';
 
 const Footer = () => {
+  const { state } = useCart();
+
+  const calculateTotal = () => {
+    return state.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
         <Button size="small">Cart</Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">${calculateTotal().toFixed(2)}</Text>
         </Text>
       </View>
     </View>
   );
 };
-
-export default Footer;
 
 const styles = StyleSheet.create({
   main: {
@@ -35,3 +40,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
 });
+
+export default Footer;
