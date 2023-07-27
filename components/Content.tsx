@@ -1,26 +1,26 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, List, ListItem } from '@ui-kitten/components';
+import {View, StyleSheet} from 'react-native';
+import {Button, List, ListItem} from '@ui-kitten/components';
 
-import { useCart } from '../CartContext';
+import {useCart} from '../CartContext';
 
 //Datos
 import data from '../data.json';
 
 //Tipos
-import { IListItem } from '../types';
+import {IListItem} from '../types';
 
 const Content = () => {
-  const { state, dispatch } = useCart();
+  const {state, dispatch} = useCart();
 
   const renderItemAccessory = (item: IListItem) => {
-    const isInCart = state.some((cartItem) => cartItem.id === item.id);
+    const isInCart = state.some(cartItem => cartItem.id === item.id);
 
     const handleAddToCart = () => {
       if (isInCart) {
-        dispatch({ type: 'REMOVE_FROM_CART', payload: item.id });
+        dispatch({type: 'REMOVE_FROM_CART', payload: item.id});
       } else {
-        dispatch({ type: 'ADD_TO_CART', payload: item });
+        dispatch({type: 'ADD_TO_CART', payload: item});
       }
     };
 
@@ -36,7 +36,7 @@ const Content = () => {
       <List
         style={styles.container}
         data={data}
-        renderItem={({ item }: { item: IListItem }): React.ReactElement => (
+        renderItem={({item}: {item: IListItem}): React.ReactElement => (
           <ListItem
             title={`${item.title} | $${item.price}`}
             description={`${item.description}`}

@@ -1,11 +1,16 @@
-import { StyleSheet, View } from 'react-native';
-import { Button, Text } from '@ui-kitten/components';
+import {StyleSheet, View} from 'react-native';
+import {Button, Text} from '@ui-kitten/components';
 
 //Context
-import { useCart } from '../CartContext';
+import {useCart} from '../CartContext';
 
-const Footer = () => {
-  const { state } = useCart();
+interface FooterProps {
+  onCartButtonClick: () => void;
+  showCart: boolean;
+}
+
+const Footer = ({onCartButtonClick, showCart}: FooterProps) => {
+  const {state} = useCart();
 
   const calculateTotal = () => {
     return state.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -14,7 +19,9 @@ const Footer = () => {
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={onCartButtonClick}>
+          {showCart ? 'Catalog' : 'Cart'}
+        </Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>

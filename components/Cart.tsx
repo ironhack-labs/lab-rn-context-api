@@ -1,30 +1,38 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, List, ListItem } from '@ui-kitten/components';
-import { useCart } from '../CartContext';
-import { IListItem } from '../types';
+import {View, StyleSheet} from 'react-native';
+import {Button, List, ListItem} from '@ui-kitten/components';
 
-const CartComponent = () => {
-  const { state, dispatch } = useCart();
+// Context
+import {useCart} from '../CartContext';
 
-  const handleRemoveFromCart = (itemId: number) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+// Tipos
+import {IListItem} from '../types';
+
+const Cart = () => {
+  const {state, dispatch} = useCart();
+
+  const renderItemAccessory = (item: IListItem) => {
+    const handleRemoveFromCart = () => {
+      dispatch({type: 'REMOVE_FROM_CART', payload: item.id});
+    };
+
+    return (
+      <Button onPress={handleRemoveFromCart} size="tiny">
+        Remove
+      </Button>
+    );
   };
 
   return (
     <View style={styles.container}>
       <List
         style={styles.container}
-        data={state.filter((item) => item.quantity > 0)} // Mostrar solo elementos con cantidad > 0
-        renderItem={({ item }: { item: IListItem }) => (
+        data={state} // Mostramos solo los elementos del carrito
+        renderItem={({item}: {item: IListItem}) => (
           <ListItem
             title={`${item.title} | $${item.price}`}
-            description={`Quantity: ${item.quantity}`}
-            accessoryRight={() => (
-              <Button onPress={() => handleRemoveFromCart(item.id)} size="tiny">
-                Remove
-              </Button>
-            )}
+            description={`${item.description}`}
+            accessoryRight={() => renderItemAccessory(item)}
           />
         )}
       />
@@ -38,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartComponent;
+export default Cart;
