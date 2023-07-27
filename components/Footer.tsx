@@ -1,17 +1,21 @@
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import {Button, Text} from '@ui-kitten/components';
+import { Button, Text } from '@ui-kitten/components';
+import { useCartContextProvider } from '../hooks/context';
 
 const Footer = () => {
+
+  const { changeCartVisibility, cartTotal } = useCartContextProvider();
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
         {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={() => { changeCartVisibility() }}>Cart</Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">${cartTotal}</Text>
         </Text>
       </View>
     </View>
