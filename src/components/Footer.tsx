@@ -1,8 +1,14 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import {useStoreCtx} from '../context';
+import {formatCurrency} from '../utils';
 
 export const Footer = () => {
+  const {cart} = useStoreCtx();
+
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
@@ -11,7 +17,7 @@ export const Footer = () => {
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">{formatCurrency(total)}</Text>
         </Text>
       </View>
     </View>
