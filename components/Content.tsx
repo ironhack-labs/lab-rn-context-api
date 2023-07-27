@@ -1,25 +1,44 @@
 import {Button, List, ListItem} from '@ui-kitten/components';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import data from '../data.json';
+import {useCart, Product} from '../context/context';
 
 interface IListItem {
   title: string;
   id: number;
   price: number;
   description: string;
+  added: boolean;
 }
 
-const renderItemAccessory = (): React.ReactElement => (
-  <Button size="tiny">Add to cart</Button>
-);
+const RenderItemAccessory = (product: Product) => {
+  const {dispatch} = useCart();
+  const addToCart = () => {
+    dispatch({type: 'ADD_TO_CART', payload: product});
+  };
+
+  const removeFromCart = () => {
+    dispatch({type: 'REMOVE_FROM_CART', payload: product});
+  };
+
+  return product.added ? (
+    <Button size="tiny" onPress={() => removeFromCart()}>
+      Remove
+    </Button>
+  ) : (
+    <Button size="tiny" onPress={() => addToCart()}>
+      Add to cart
+    </Button>
+  );
+};
 
 const Content = () => {
+  const {state} = useCart();
   return (
     <View style={styles.container}>
       <List
         style={styles.container}
-        data={data}
+        data={state.products}
         renderItem={({
           item,
           index,
@@ -30,7 +49,7 @@ const Content = () => {
           <ListItem
             title={`${item.title} | $${item.price}`}
             description={`${item.description} ${index + 1}`}
-            accessoryRight={renderItemAccessory}
+            accessoryRight={() => RenderItemAccessory(item)}
           />
         )}
       />
