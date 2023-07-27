@@ -1,39 +1,29 @@
 import {Button, List, ListItem} from '@ui-kitten/components';
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import data from '../data.json';
 
-interface IListItem {
+import {CartContext} from '../src/context/CartContext';
+import { Catalog } from '../src/components/Catalog';
+import { Cart } from '../src/components/Cart';
+
+export interface IListItem {
   title: string;
   id: number;
   price: number;
   description: string;
 }
 
-const renderItemAccessory = (): React.ReactElement => (
-  <Button size="tiny">Add to cart</Button>
-);
+
 
 const Content = () => {
+  const {cartState} = useContext(CartContext);
+
   return (
     <View style={styles.container}>
-      <List
-        style={styles.container}
-        data={data}
-        renderItem={({
-          item,
-          index,
-        }: {
-          item: IListItem;
-          index: number;
-        }): React.ReactElement => (
-          <ListItem
-            title={`${item.title} | $${item.price}`}
-            description={`${item.description} ${index + 1}`}
-            accessoryRight={renderItemAccessory}
-          />
-        )}
-      />
+      {cartState.showCart
+      ? <Cart/>
+      : <Catalog/>
+      }
     </View>
   );
 };
