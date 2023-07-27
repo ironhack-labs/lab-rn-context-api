@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {List, ListItem, Button, Text} from '@ui-kitten/components';
-import {CartContext, ICartItem, ActionType} from './context/CartContext';
+import CartContext, {ICartItem, ActionType} from '../CartContext';
 import data from '../data.json';
 
 const Content = () => {
@@ -46,11 +46,5 @@ const Content = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default Content;
