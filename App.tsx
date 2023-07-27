@@ -16,9 +16,10 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import Header from './components/Header';
 import Content from './components/Content';
 import Footer from './components/Footer';
+import {CartProvider} from './src/context/CartContext';
 
 export default () => (
-  <>
+  <AppState>
     <SafeAreaView style={styles.topArea} />
     <StatusBar barStyle="light-content" backgroundColor="rgb(21, 26, 48)" />
     <SafeAreaView style={styles.mainArea}>
@@ -33,8 +34,12 @@ export default () => (
         </Layout>
       </ApplicationProvider>
     </SafeAreaView>
-  </>
+  </AppState>
 );
+
+const AppState = ({children}: {children: JSX.Element | JSX.Element[]}) => {
+  return <CartProvider>{children}</CartProvider>;
+};
 
 const styles = StyleSheet.create({
   topArea: {flex: 0, backgroundColor: 'rgb(21, 26, 48)'},
