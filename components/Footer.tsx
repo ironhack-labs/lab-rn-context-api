@@ -1,8 +1,22 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import {useCartContext} from '../context/CartContext';
 
 const Footer = () => {
+  const {cartItems} = useCartContext();
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
+      return totalPrice.toFixed(2);
+    };
+
+    setTotal(Number(calculateTotal()));
+  }, [cartItems]);
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
@@ -11,7 +25,7 @@ const Footer = () => {
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">${total.toFixed(2)}</Text>
         </Text>
       </View>
     </View>
