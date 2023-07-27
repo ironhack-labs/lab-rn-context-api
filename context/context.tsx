@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useContext, Dispatch, ReactNode} from 'react';
+import React, {createContext, useReducer, useContext, Dispatch} from 'react';
 import data from '../data.json';
 
 export type Product = {
