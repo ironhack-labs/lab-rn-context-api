@@ -12,6 +12,8 @@ import {
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
+import {CartProvider} from './context';
+
 // Components
 import Header from './components/Header';
 import Content from './components/Content';
@@ -24,13 +26,15 @@ export default () => (
     <SafeAreaView style={styles.mainArea}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.dark}>
-        <Layout style={styles.mainArea}>
-          <Header />
-          <Divider />
-          <Content />
-          <Divider />
-          <Footer />
-        </Layout>
+        <CartProvider>
+          <Layout style={styles.mainArea}>
+            <Header />
+            <Divider />
+            <Content />
+            <Divider />
+            <Footer />
+          </Layout>
+        </CartProvider>
       </ApplicationProvider>
     </SafeAreaView>
   </>
