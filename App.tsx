@@ -1,49 +1,34 @@
-import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
-
-// UI KItten
+import React, {useState} from 'react';
+import {SafeAreaView, StatusBar} from 'react-native';
 import * as eva from '@eva-design/eva';
-import {
-  ApplicationProvider,
-  Divider,
-  IconRegistry,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry, Layout} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {ProductContextProvider} from './src/context/ProductContext';
+import CartScreen from './src/screens/CartScreen';
+import {appStyles} from './src/theme/App.styles';
+import {HomeScreen} from './src/screens/HomeScreen';
 
-// Components
-import Header from './components/Header';
-import Content from './components/Content';
-import Footer from './components/Footer';
+export default () => {
+  const [showCart, setShowCart] = useState(false);
 
-export default () => (
-  <>
-    <SafeAreaView style={styles.topArea} />
-    <StatusBar barStyle="light-content" backgroundColor="rgb(21, 26, 48)" />
-    <SafeAreaView style={styles.mainArea}>
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.dark}>
-        <Layout style={styles.mainArea}>
-          <Header />
-          <Divider />
-          <Content />
-          <Divider />
-          <Footer />
-        </Layout>
-      </ApplicationProvider>
-    </SafeAreaView>
-  </>
-);
-
-const styles = StyleSheet.create({
-  topArea: {flex: 0, backgroundColor: 'rgb(21, 26, 48)'},
-  mainArea: {
-    flex: 1,
-    backgroundColor: 'rgb(21, 26, 48)',
-  },
-
-  card: {
-    flex: 1,
-  },
-});
+  return (
+    <ProductContextProvider>
+      <SafeAreaView style={appStyles.topArea} />
+      <StatusBar barStyle="light-content" backgroundColor="rgb(21, 26, 48)" />
+      <SafeAreaView style={appStyles.mainArea}>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider {...eva} theme={eva.dark}>
+          <Layout style={appStyles.mainArea}>
+            {!showCart ? (
+              <>
+                <HomeScreen setShowCart={() => setShowCart(true)} />
+              </>
+            ) : (
+              <CartScreen hideCart={() => setShowCart(false)} />
+            )}
+          </Layout>
+        </ApplicationProvider>
+      </SafeAreaView>
+    </ProductContextProvider>
+  );
+};
