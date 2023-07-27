@@ -3,72 +3,84 @@
     "title": "Introduction to Python",
     "id": 1,
     "price": 49.99,
-    "description": "Learn the fundamentals of Python programming language."
+    "description": "Learn the fundamentals of Python programming language.",
+    "quantity": 0 
   },
   {
     "title": "Web Development with JavaScript",
     "id": 2,
     "price": 59.99,
-    "description": "Build interactive and dynamic websites using JavaScript."
+    "description": "Build interactive and dynamic websites using JavaScript.",
+    "quantity": 0 
   },
   {
     "title": "Java Programming Masterclass",
     "id": 3,
     "price": 79.99,
-    "description": "Become proficient in Java programming and software development."
+    "description": "Become proficient in Java programming and software development.",
+    "quantity": 0 
   },
   {
     "title": "HTML and CSS Essentials",
     "id": 4,
     "price": 39.99,
-    "description": "Learn the basics of HTML and CSS for web design."
+    "description": "Learn the basics of HTML and CSS for web design.",
+    "quantity": 0 
   },
   {
     "title": "Data Science with R",
     "id": 5,
     "price": 69.99,
-    "description": "Explore data analysis and visualization using R."
+    "description": "Explore data analysis and visualization using R.",
+    "quantity": 0 
   },
   {
     "title": "C++ Programming for Beginners",
     "id": 6,
     "price": 54.99,
-    "description": "Get started with C++ programming language and its applications."
+    "description": "Get started with C++ programming language and its applications.",
+    "quantity": 0 
   },
   {
     "title": "Full-Stack Web Development with Node.js",
     "id": 7,
     "price": 89.99,
-    "description": "Learn how to build full-stack web applications using Node.js."
+    "description": "Learn how to build full-stack web applications using Node.js.",
+    "quantity": 0 
   },
   {
     "title": "Android App Development with Kotlin",
     "id": 8,
     "price": 74.99,
-    "description": "Create Android apps using the modern Kotlin programming language."
+    "description": "Create Android apps using the modern Kotlin programming language.",
+    "quantity": 0 
   },
   {
     "title": "Machine Learning Fundamentals",
     "id": 9,
     "price": 99.99,
-    "description": "Discover the basics of machine learning and its algorithms."
+    "description": "Discover the basics of machine learning and its algorithms.",
+    "quantity": 0 
   },
   {
     "title": "Python Django Web Framework",
     "id": 10,
     "price": 69.99,
-    "description": "Build web applications using the Django framework in Python."
+    "description": "Build web applications using the Django framework in Python.",
+    "quantity": 0 
   },
   {
     "title": "React.js Frontend Development",
     "id": 11,
     "price": 79.99,
-    "description": "Learn how to develop interactive UIs with React.js."
+    "description": "Learn how to develop interactive UIs with React.js.",
+    "quantity": 0 
   },
   {
     "title": "Ethical Hacking and Cybersecurity",
     "id": 12,
     "price": 109.99,
-    "description": "Understand cybersecurity principles and ethical hacking techniques."
+    "description": "Understand cybersecurity principles and ethical hacking techniques.",
+    "quantity": 0 
   }
 ]
