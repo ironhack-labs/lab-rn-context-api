@@ -1,17 +1,24 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import { CartContext } from '../context/CartContext';
 
 const Footer = () => {
+  const { cartState, toggleCart } = useContext(CartContext);
+  const totalArticles = cartState.item.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0)
+
+  const handleCart = () => {
+    toggleCart(!cartState.showCart)
+  }
+  
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={handleCart}>{cartState.showCart ? 'Catalog' : 'Cart' }</Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">{totalArticles}</Text>
         </Text>
       </View>
     </View>
