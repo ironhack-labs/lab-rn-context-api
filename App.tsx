@@ -12,10 +12,11 @@ import {
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
-// Components
+
 import Header from './components/Header';
 import Content from './components/Content';
 import Footer from './components/Footer';
+import { CartProvider } from './context/CartContext';
 
 export default () => (
   <>
@@ -25,16 +26,26 @@ export default () => (
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.dark}>
         <Layout style={styles.mainArea}>
-          <Header />
-          <Divider />
-          <Content />
-          <Divider />
-          <Footer />
+          <AppState>
+            <Header />
+            <Divider />
+            <Content />
+            <Divider />
+            <Footer />
+          </AppState>
         </Layout>
       </ApplicationProvider>
     </SafeAreaView>
   </>
 );
+
+const AppState = ({children}: {children: JSX.Element[]}) => {
+  return (
+    <CartProvider>
+      {children}
+    </CartProvider>
+  )
+}
 
 const styles = StyleSheet.create({
   topArea: {flex: 0, backgroundColor: 'rgb(21, 26, 48)'},
