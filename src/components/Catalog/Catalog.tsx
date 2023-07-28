@@ -1,14 +1,18 @@
 import {Button, List, ListItem} from '@ui-kitten/components';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {View, StyleSheet} from 'react-native';
-import data from '../data.json';
-import { CartContext } from '../context/CartContext';
+import data from '../../../data.json';
+import { CartContext } from '../../context/CartContext';
 
 export interface IListItem {
   title: string;
   id: number;
   price: number;
   description: string;
+}
+
+interface CartItems {
+  items?: IListItem[]
 }
 
 const renderItemAccessory = ({...item}): React.ReactElement => {
@@ -34,13 +38,12 @@ const renderItemAccessory = ({...item}): React.ReactElement => {
   )
 };
 
-const Content = () => {
-
+const Catalog = ({items}: CartItems) => {
   return (
     <View style={styles.container}>
       <List
         style={styles.container}
-        data={data}
+        data={!items ? data : items}
         renderItem={({
           item,
           index,
@@ -65,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Content;
+export default Catalog;

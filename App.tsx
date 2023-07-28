@@ -8,15 +8,14 @@ import {
   Divider,
   IconRegistry,
   Layout,
-  Text,
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 
-import Header from './components/Header';
-import Content from './components/Content';
-import Footer from './components/Footer';
-import { CartProvider } from './context/CartContext';
+import Header from './src/components/Header';
+import Content from './src/components/Content';
+import Footer from './src/components/Footer';
+import { CartProvider } from './src/context/CartContext';
 
 export default () => (
   <>

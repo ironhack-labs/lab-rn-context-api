@@ -4,14 +4,17 @@ import {Button, Text} from '@ui-kitten/components';
 import { CartContext } from '../context/CartContext';
 
 const Footer = () => {
-  const { cartState } = useContext(CartContext);
+  const { cartState, toggleCart } = useContext(CartContext);
   const totalArticles = cartState.item.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0)
+
+  const handleCart = () => {
+    toggleCart(!cartState.showCart)
+  }
   
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={handleCart}>{cartState.showCart ? 'Catalog' : 'Cart' }</Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
