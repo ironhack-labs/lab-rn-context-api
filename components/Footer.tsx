@@ -1,17 +1,46 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import {useCart} from '../context/context';
 
 const Footer = () => {
+  const {state, dispatch} = useCart();
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    if (state.products.length) {
+      let newTotal = 0;
+      for (let index = 0; index < state.products.length; index++) {
+        const produt = state.products[index];
+        if (produt.added === true) {
+          newTotal += produt.price;
+        }
+      }
+      setTotal(newTotal);
+    }
+  }, [state]);
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
         {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button
+          size="small"
+          onPress={() =>
+            dispatch({type: 'SHOW_CART', payload: !state.showCart})
+          }>
+          {state.showCart ? 'Catalog' : 'Cart'}
+        </Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total:{' '}
+          <Text category="label">
+            {new Intl.NumberFormat('es-US', {
+              style: 'currency',
+              currency: 'USD',
+            }).format(total)}
+          </Text>
         </Text>
       </View>
     </View>
