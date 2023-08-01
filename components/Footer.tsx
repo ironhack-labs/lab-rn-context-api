@@ -1,24 +1,38 @@
+import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
 import {Button, Text} from '@ui-kitten/components';
+import CartContext from '../context/CartContext';
+import data from '../data.json';
 
 const Footer = () => {
+  const {showCart, toggleCart, cartItems} = useContext(CartContext);
+
+  const calculateTotal = (): number => {
+    // Filtrado de un array de datos para obtener los items
+    const selectedItems = data.filter(item => cartItems.includes(item.id));
+    // Como calcular el precio total de los items
+    const total = selectedItems.reduce((acc, item) => acc + item.price, 0);
+
+    return total;
+  };
+  //Counter de items dentro del carrito
+  const cartItemCount = cartItems.length;
+
   return (
     <View style={styles.main}>
       <View style={styles.section}>
-        {/* TODO: Bonus Make it a button and switch between catalog and current cart */}
-        <Button size="small">Cart</Button>
+        <Button size="small" onPress={toggleCart}>
+          {showCart ? `Catalog (${cartItemCount})` : `Cart (${cartItemCount})`}
+        </Button>
       </View>
       <View style={[styles.section, styles.total]}>
         <Text>
-          Total: <Text category="label">$0.00</Text>
+          Total: <Text category="label">${calculateTotal().toFixed(2)}</Text>
         </Text>
       </View>
     </View>
   );
 };
-
-export default Footer;
 
 const styles = StyleSheet.create({
   main: {
@@ -35,3 +49,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
 });
+
+export default Footer;
